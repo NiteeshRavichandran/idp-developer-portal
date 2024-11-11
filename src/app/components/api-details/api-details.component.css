@@ -1,0 +1,11 @@
+.main-content-container {
+    margin-left: 260px; /* Space for the sidebar */
+    padding: 20px;
+  }
+  
+  @media (max-width: 768px) {
+    .main-content-container {
+      margin-left: 0; /* On smaller screens, the sidebar will overlay */
+    }
+  }
+  

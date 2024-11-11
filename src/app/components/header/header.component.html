@@ -1,2 +1,21 @@
-<p>header works!</p>
-<app-sidebar></app-sidebar>
+<header class="dev-portal-header">
+    <div class="header-logo">
+      <img src="https://via.placeholder.com/120" alt="Developer Portal Logo">
+    </div>
+    <nav class="header-nav">
+      <ul>
+        <li><a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+        <li class="nav-divider"></li>
+        <li><a href="#" class="profile-link">
+          <span class="material-icons">account_circle</span>
+          Profile
+        </a>
+        <ul class="profile-dropdown">
+          <li><a href="#">Settings</a></li>
+          <li><a href="#">Logout</a></li>
+        </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  

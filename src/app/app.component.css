@@ -1,0 +1,33 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-container {
+    display: flex;
+    flex: 1;
+    position: relative;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    padding-top: 80px;
+    transition: margin-left 0.3s ease-in-out;
+  }
+  
+  .sidebar-container .main-content {
+    margin-left: 20;
+  }
+  
+  .sidebar-container .main-content.no-sidebar {
+    margin-left: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar-container .main-content {
+      margin-left: 100;
+      margin-top: 60px;
+    }
+  }
+  

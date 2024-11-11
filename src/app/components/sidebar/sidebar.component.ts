@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,10 +11,12 @@ import { NgFor } from '@angular/common';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
-export class SidebarComponent {
-  menuItems = [
-    { label: 'Dashboard', icon: 'dashboard' },
-    { label: 'API Documentation', icon: 'description' },
-    { label: 'Settings', icon: 'settings' }
-  ];
+export class SidebarComponent implements OnInit {
+  currentYear = new Date().getFullYear();
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
 }

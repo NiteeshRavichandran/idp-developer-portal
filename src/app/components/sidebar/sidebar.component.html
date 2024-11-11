@@ -1,13 +1,14 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav mode="side" opened>
-    <mat-nav-list>
-      <mat-list-item *ngFor="let item of menuItems">
-        <mat-icon>{{ item.icon }}</mat-icon>
-        <span>{{ item.label }}</span>
-      </mat-list-item>
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <ng-content></ng-content>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<aside class="dev-portal-sidebar">
+  <div class="sidebar-header">
+    <h4>Developer Resources</h4>
+  </div>
+  <ul class="sidebar-nav">
+    <li><a routerLink="/" routerLinkActive="active">Dashboard</a></li>
+    <li><a routerLink="/" routerLinkActive="active">API Documentation</a></li>
+    <li><a routerLink="/" routerLinkActive="active">Code Samples</a></li>
+    <li><a routerLink="/" routerLinkActive="active">FAQ</a></li>
+  </ul>
+  <div class="sidebar-footer">
+    <p>&copy; {{ currentYear }} Your Company</p>
+  </div>
+</aside>
