@@ -1,13 +1,112 @@
-<!-- <app-header></app-header> -->
-
-<mat-tab-group>
-  <mat-tab label="GET"> <!-- GET Method Details --> </mat-tab>
-  <mat-tab label="POST"> <!-- POST Method Details --> </mat-tab>
-  <mat-tab label="PUT"> <!-- PUT Method Details --> </mat-tab>
-  <mat-tab label="DELETE"> <!-- DELETE Method Details --> </mat-tab>
-</mat-tab-group>
-
-<!-- <app-footer></app-footer> -->
 <div class="main-content-container">
-  <p>This is the main content area. You can add your page content here.</p>
+  <mat-tab-group class="custom-tab-group">
+    <!-- GET Tab -->
+    <mat-tab label="GET">
+      <div class="tab-content">
+        <h3 class="tab-title">Find Student by UUID</h3>
+        <p><strong>Summary:</strong> Provide the complete Student Details</p>
+        <p><strong>Description:</strong> Provide the complete Student Details</p>
+        <p><strong>Parameters:</strong></p>
+        <ul class="parameters-list">
+          <li>Path: <code class="code-block">studentUuid</code> (UUID)</li>
+          <li>Headers:
+            <ul>
+              <li><code class="code-block">x-api-key</code> (string)</li>
+              <li><code class="code-block">host</code> (string)</li>
+              <li><code class="code-block">X-Correlation-ID</code> (string)</li>
+              <li><code class="code-block">Source-App</code> (string)</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>Responses:</strong></p>
+        <ul class="responses-list">
+          <li><strong>200:</strong> Successful operation</li>
+          <li><strong>400:</strong> Validation error</li>
+          <li><strong>500:</strong> Internal server error</li>
+        </ul>
+      </div>
+    </mat-tab>
+
+    <!-- POST Tab -->
+    <mat-tab label="POST">
+      <div class="tab-content">
+        <h3 class="tab-title">Add New Student</h3>
+        <p><strong>Summary:</strong> Add new student profile</p>
+        <p><strong>Description:</strong> To post student details to API</p>
+        <p><strong>Parameters:</strong></p>
+        <ul class="parameters-list">
+          <li>Headers:
+            <ul>
+              <li><code class="code-block">x-api-key</code> (string)</li>
+              <li><code class="code-block">host</code> (string)</li>
+              <li><code class="code-block">X-Correlation-ID</code> (string)</li>
+              <li><code class="code-block">Source-App</code> (string)</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>Request Body:</strong> Create a new student</p>
+        <p><strong>Responses:</strong></p>
+        <ul class="responses-list">
+          <li><strong>200:</strong> Successful operation</li>
+          <li><strong>400:</strong> Validation error</li>
+          <li><strong>500:</strong> Internal server error</li>
+        </ul>
+      </div>
+    </mat-tab>
+
+    <!-- PUT Tab -->
+    <mat-tab label="PUT">
+      <div class="tab-content">
+        <h3 class="tab-title">Update Student by UUID</h3>
+        <p><strong>Summary:</strong> Update the Student Details</p>
+        <p><strong>Description:</strong> Update the Student Details</p>
+        <p><strong>Parameters:</strong></p>
+        <ul class="parameters-list">
+          <li>Path: <code class="code-block">studentUuid</code> (UUID)</li>
+          <li>Headers:
+            <ul>
+              <li><code class="code-block">x-api-key</code> (string)</li>
+              <li><code class="code-block">host</code> (string)</li>
+              <li><code class="code-block">X-Correlation-ID</code> (string)</li>
+              <li><code class="code-block">Source-App</code> (string)</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>Request Body:</strong> Student update details</p>
+        <p><strong>Responses:</strong></p>
+        <ul class="responses-list">
+          <li><strong>200:</strong> Successful operation</li>
+          <li><strong>400:</strong> Validation error</li>
+          <li><strong>500:</strong> Internal server error</li>
+        </ul>
+      </div>
+    </mat-tab>
+
+    <!-- DELETE Tab -->
+    <mat-tab label="DELETE">
+      <div class="tab-content">
+        <h3 class="tab-title">Anonymize Student</h3>
+        <p><strong>Summary:</strong> Anonymizing the student by student uuid</p>
+        <p><strong>Description:</strong> Anonymizing the student by student uuid</p>
+        <p><strong>Parameters:</strong></p>
+        <ul class="parameters-list">
+          <li>Path: <code class="code-block">studentId</code> (UUID)</li>
+          <li>Headers:
+            <ul>
+              <li><code class="code-block">x-api-key</code> (string)</li>
+              <li><code class="code-block">host</code> (string)</li>
+              <li><code class="code-block">X-Correlation-ID</code> (string)</li>
+              <li><code class="code-block">Source-App</code> (string)</li>
+            </ul>
+          </li>
+        </ul>
+        <p><strong>Responses:</strong></p>
+        <ul class="responses-list">
+          <li><strong>200:</strong> Successful operation</li>
+          <li><strong>400:</strong> Validation error</li>
+          <li><strong>500:</strong> Internal server error</li>
+        </ul>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
 </div>

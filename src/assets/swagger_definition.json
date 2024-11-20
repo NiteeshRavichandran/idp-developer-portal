@@ -1,0 +1,2989 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.1.0",
+    "title": "Customer Profile Services",
+    "suffix": "CP",
+    "description": "This is the API specification document for Customer profile microservice"
+  },
+  "servers": [
+    {
+      "url": "https://{host}/",
+      "variables": {
+        "host": {
+          "enum": [
+            "vpce-0dcf9015817b240cc-zvajuqhf.execute-api.ap-southeast-1.vpce.amazonaws.com/dev",
+            "vpce-0f5777351ece5be37-7lfwebox.execute-api.ap-southeast-1.vpce.amazonaws.com/stg"
+          ],
+          "default": "vpce-0dcf9015817b240cc-zvajuqhf.execute-api.ap-southeast-1.vpce.amazonaws.com/dev"
+        }
+      }
+    }
+  ],
+  "security": [
+    {
+      "application": [
+        "read",
+        "write",
+        "listen"
+      ]
+    }
+  ],
+  "tags": [
+    {
+      "name": "students",
+      "description": "Customer Profile Microservice Operations related to students"
+    }
+  ],
+  "paths": {
+    "/v3/students": {
+      "post": {
+        "tags": [
+          "students"
+        ],
+        "summary": "Add new student profile",
+        "description": "To post student details to API",
+        "operationId": "createStudent",
+        "parameters": [
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Create a new student",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Student"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentCreation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/students/{studentUuid}": {
+      "get": {
+        "tags": [
+          "students"
+        ],
+        "summary": "Finds Students by StudentUUID",
+        "description": "Provide the complete Student Details",
+        "operationId": "findStudentByStudentUUId",
+        "parameters": [
+          {
+            "name": "studentUuid",
+            "in": "path",
+            "description": "StudentUUID value that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "students"
+        ],
+        "summary": "Update Students by StudentUUID",
+        "description": "Update the Student Details",
+        "operationId": "updateStudentByStudentUUId",
+        "parameters": [
+          {
+            "name": "studentUuid",
+            "in": "path",
+            "description": "StudentUUID value that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StudentUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentCreation"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/students/find-student-by-student-crm-uuid/{studentCrmUuid}": {
+      "get": {
+        "tags": [
+          "students"
+        ],
+        "summary": "Finds Students by StudentCrmUUID",
+        "description": "Provide the complete Student Details",
+        "operationId": "findStudentByStudentCrmUuid",
+        "parameters": [
+          {
+            "name": "studentCrmUuid",
+            "in": "path",
+            "description": "StudentCrmUuid value that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/students/find-studentuuid-by-student-crmid/{crmStudentId}": {
+      "get": {
+        "tags": [
+          "students"
+        ],
+        "summary": "Finds Student UUID by crmStudentId",
+        "description": "Provide only the StudentUuid Details",
+        "operationId": "findStudentUuidByCrmStudentId",
+        "parameters": [
+          {
+            "name": "studentCrmid",
+            "in": "path",
+            "description": "CrmStudentId value that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentUuidByCrmUuid"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/students/find-by-email-id": {
+      "get": {
+        "tags": [
+          "students"
+        ],
+        "summary": "Finds Students by StudentEmailID",
+        "description": "Provide the complete Student Details",
+        "operationId": "findStudentByEmailId",
+        "parameters": [
+          {
+            "name": "StudentPrimaryEmailID",
+            "in": "querystring",
+            "description": "StudentEmailID value that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "email",
+              "example": "user@example.com"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Student"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/student/find-studentuuid-by-EmailId/{studentEmailId}": {
+      "get": {
+        "tags": [
+          "students"
+        ],
+        "summary": "Finds Student UUID by email id",
+        "description": "Provide only ID details (No PII data)",
+        "operationId": "findStudentUuidByEmailId",
+        "parameters": [
+          {
+            "name": "studentEmailId",
+            "in": "path",
+            "description": "Email ID of the student",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "email",
+              "example": "user@example.com"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentUuidByEmailId"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/students/{studentId}/anonymize": {
+      "post": {
+        "tags": [
+          "students"
+        ],
+        "summary": "Anonymize student",
+        "description": "Anonymizing the student by student uuid",
+        "operationId": "anonymizeStudentByStudentUuid",
+        "parameters": [
+          {
+            "name": "studentId",
+            "in": "path",
+            "description": "StudentUUID value that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentAnonymization"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoneTypeBody"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/students/{studentUuid}/sendVerifyEmail": {
+      "post": {
+        "tags": [
+          "students"
+        ],
+        "parameters": [
+          {
+            "name": "studentUuid",
+            "in": "path",
+            "required": true,
+            "description": "UUID of the Student",
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "example": "2984c96e-12fa-11eb-adc1-0242ac120004"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Sends an email-verification email to the Student",
+        "operationId": "sendVerifyEmail",
+        "description": "Send an email-verification email to the Student. An email contains a link the user can click to verify their email address\n",
+        "responses": {
+          "200": {
+            "headers": {
+              "X-Correlation-ID": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentSendVerify"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NoneTypeBody"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v3/students/emailVerifiedCheck": {
+      "get": {
+        "tags": [
+          "students"
+        ],
+        "parameters": [
+          {
+            "name": "studentEmailId",
+            "in": "querystring",
+            "description": "StudentEmailID value that need to be considered for filter",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "email",
+              "example": "user@example.com"
+            }
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "host",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "X-Correlation-ID",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Source-App",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "summary": "Check whether email is verified for thr Student",
+        "operationId": "emailVerifiedCheck",
+        "description": "Check whether email is verified for thr Student\n",
+        "responses": {
+          "200": {
+            "description": "Email verification status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StudentGetEmailVerify"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "integer"
+          }
+        }
+      },
+      "ServerError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "statusCode": {
+            "type": "integer"
+          }
+        }
+      },
+      "MarketingAcceptanceFlags": {
+        "type": "object",
+        "properties": {
+          "acceptEmails": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "acceptSms": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "acceptPhoneCalls": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          }
+        }
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "addressType": {
+            "type": "string",
+            "example": "Destination",
+            "enum": [
+              "Home",
+              "Destination"
+            ],
+            "x-nullable": true
+          },
+          "houseNumber": {
+            "type": "string",
+            "example": "42",
+            "x-nullable": true
+          },
+          "additionalAddressLine": {
+            "type": "string",
+            "example": "First Floor",
+            "x-nullable": true
+          },
+          "streetName": {
+            "type": "string",
+            "example": "Mawson Lakes Boulevard",
+            "x-nullable": true
+          },
+          "city": {
+            "type": "string",
+            "example": "Mawson Lakes",
+            "x-nullable": true
+          },
+          "state": {
+            "type": "string",
+            "example": "victoria",
+            "x-nullable": true
+          },
+          "country": {
+            "type": "string",
+            "example": "India",
+            "x-nullable": true
+          },
+          "postalCode": {
+            "type": "string",
+            "example": "5095",
+            "x-nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "+91 100800",
+            "x-nullable": true
+          },
+          "mobileNumber": {
+            "type": "string",
+            "example": "+91 89100800",
+            "x-nullable": true
+          },
+          "isPrimary": {
+            "type": "string",
+            "example": "Yes",
+            "x-nullable": true
+          }
+        },
+        "xml": {
+          "name": "Address"
+        }
+      },
+      "EmploymentHistory": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "example": "CP-ABCDEFGHIJ1"
+          },
+          "employmentHistoryObjectID": {
+            "type": "string",
+            "example": "00163E26B79B1ED795843931B5306536",
+            "maximum": 70
+          },
+          "organizationName": {
+            "type": "string",
+            "example": "CTS",
+            "maximum": 255
+          },
+          "industry": {
+            "type": "string",
+            "example": "Computer product manufacturing",
+            "maximum": 3,
+            "enum": [
+              "10 - Apparel Manufacturing",
+              "100 - Social Assistance",
+              "101 - Specialty Trade Contractors"
+            ]
+          },
+          "occupationalLevel": {
+            "type": "string",
+            "maximum": 2,
+            "example": "Employee(Middle or junior level)",
+            "enum": [
+              "1- Worker in the Home",
+              "10- Employee (Managerial Level)",
+              "2- Student"
+            ]
+          },
+          "designation": {
+            "type": "string",
+            "maximum": 80,
+            "example": "Analyst"
+          },
+          "description": {
+            "type": "string",
+            "maximum": 80,
+            "example": "Program analyst"
+          },
+          "employmentSector": {
+            "type": "string",
+            "example": "Private",
+            "maximum": 2,
+            "enum": [
+              "1- Private",
+              "2- Public (Govt.)",
+              "3- Unknown"
+            ]
+          },
+          "employmentStartDate": {
+            "type": "string",
+            "example": "2019-08-02"
+          },
+          "employmentEndDate": {
+            "type": "string",
+            "example": "2019-08-02"
+          },
+          "address": {
+            "type": "string",
+            "example": "No",
+            "default": false
+          },
+          "country": {
+            "type": "string",
+            "example": "India",
+            "maximum": 3,
+            "enum": [
+              "AD - Andorra",
+              "AE - United Arab Emirates",
+              "AF - Afghanistan"
+            ]
+          },
+          "paidWork": {
+            "type": "string",
+            "example": "Yes",
+            "maximum": 27,
+            "enum": [
+              "Yes",
+              "No"
+            ]
+          },
+          "partTime": {
+            "type": "string",
+            "example": "Yes",
+            "maximum": 27,
+            "enum": [
+              "Yes",
+              "No"
+            ]
+          },
+          "partTimeHours": {
+            "type": "integer",
+            "example": 4
+          },
+          "englishSpeakingWorkplace": {
+            "type": "string",
+            "example": "No",
+            "maximum": 27,
+            "enum": [
+              "Yes",
+              "No"
+            ]
+          },
+          "reasonForLeaving": {
+            "type": "string",
+            "example": "No",
+            "maximum": 2,
+            "enum": [
+              "10 - Relocated to another city or town",
+              "11 - Another job offer",
+              "12 - Part-time/Summer Job Only"
+            ]
+          }
+        }
+      },
+      "EducationHistory": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "example": "CP-ABCDEFGHIJ2"
+          },
+          "educationHistoryObjectID": {
+            "type": "string",
+            "example": "00163E26B79B1ED795843931B5306536",
+            "maximum": 70
+          },
+          "institutionName": {
+            "type": "string",
+            "example": "Monash University",
+            "maximum": 480
+          },
+          "studyLanguageCode": {
+            "type": "string",
+            "maximum": 2,
+            "example": "1P 1X",
+            "enum": [
+              "1P - Portuguese_PT",
+              "1X - Spanish_MX",
+              "3F - French_CA"
+            ]
+          },
+          "commenceStudy": {
+            "type": "string",
+            "example": "2012-11-08"
+          },
+          "graduationDate": {
+            "type": "string",
+            "example": "2012-11-08"
+          },
+          "grade": {
+            "type": "string",
+            "example": "A",
+            "maximum": 40
+          },
+          "considerCreditTrans": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "degreeTypeCode": {
+            "type": "string",
+            "example": "Bachelor Degree",
+            "maximum": 2
+          },
+          "degreeName": {
+            "type": "string",
+            "example": "BBM",
+            "maximum": 40,
+            "enum": [
+              "1 - Undergraduate Certificate",
+              "2 - Postgraduate Certificate",
+              "3 - Doctorate (Specialised)"
+            ]
+          },
+          "fieldOfStudy": {
+            "type": "string",
+            "example": "Commerce",
+            "maximum": 255
+          },
+          "studyMode": {
+            "type": "string",
+            "maximum": 2,
+            "enum": [
+              "External",
+              "On-Campus",
+              "Online"
+            ],
+            "example": "Commerce"
+          },
+          "statusCode": {
+            "type": "string",
+            "maximum": 2,
+            "enum": [
+              "Completed",
+              "Currently Studying",
+              "Discontinued"
+            ],
+            "example": "Completed"
+          },
+          "discontinuedReason": {
+            "type": "string",
+            "example": "Ill Health",
+            "maximum": 480
+          },
+          "discontinuedDate": {
+            "type": "string",
+            "example": "2014-06-30"
+          },
+          "state": {
+            "type": "string",
+            "maximum": 6,
+            "example": "Tamil Nadu"
+          },
+          "country": {
+            "type": "string",
+            "maximum": 3,
+            "example": "India",
+            "enum": [
+              "AD - Andorra",
+              "AE - United Arab Emirates",
+              "AF - Afghanistan"
+            ]
+          },
+          "levelOfSecondaryQualification": {
+            "type": "string",
+            "maximum": 60,
+            "example": "year 11 - other boards",
+            "enum": [
+              "Curtin Foundation Studies:60% or higher",
+              "Monash Foundation Studies:60% or higher with 55% in English"
+            ]
+          },
+          "isInstitutionIDPPartner": {
+            "type": "string",
+            "example": "yes",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "gradeType": {
+            "type": "string",
+            "example": "Percentage",
+            "enum": [
+              "Percentage",
+              "GPA 10-point scale",
+              "10 point grading system",
+              "7 point scale",
+              "Degree classification"
+            ]
+          },
+          "duration": {
+            "type": "integer",
+            "example": 3
+          },
+          "noOfBacklogs": {
+            "type": "integer",
+            "example": 2
+          }
+        }
+      },
+      "StudentBaseInfo": {
+        "required": [
+          "primaryEmail",
+          "cognitoIdentityID"
+        ],
+        "type": "object",
+        "properties": {
+          "crmStudentID": {
+            "type": "string",
+            "example": "500154146",
+            "x-nullable": true
+          },
+          "studentUUID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "00163e26-b78b-1ed7-8ef0-713f46aa093e",
+            "x-nullable": true
+          },
+          "cognitoIdentityID": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid",
+              "example": "us-east-1:88859bc9-0149-4183-bf10-39e36EXAMPLE",
+              "x-nullable": true
+            }
+          },
+          "title": {
+            "type": "string",
+            "example": "Ms.",
+            "enum": [
+              "Ms.",
+              "Mr."
+            ],
+            "x-nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Serina",
+            "x-nullable": false
+          },
+          "middleName": {
+            "type": "string",
+            "example": "John",
+            "x-nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Joseph",
+            "x-nullable": false
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date",
+            "example": "1997-01-26",
+            "x-nullable": true
+          },
+          "primaryEmail": {
+            "type": "string",
+            "example": "serina.xxxxph@gmail.com",
+            "x-nullable": false
+          },
+          "primaryEmailVerified": {
+            "type": "boolean",
+            "description": "Indicates whether the user has verified his primary email (or) not. Default value is false.",
+            "example": true,
+            "x-nullable": false
+          },
+          "primaryMobileNumber": {
+            "type": "string",
+            "example": "+65 664564654",
+            "x-nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "example": "Female",
+            "enum": [
+              "Gender not known",
+              "Male",
+              "Female",
+              "Nonbinary",
+              "Gender not specified"
+            ],
+            "x-nullable": true
+          },
+          "countryOfResidencyCode": {
+            "type": "string",
+            "example": "IN",
+            "x-nullable": true
+          },
+          "countryOfCitizenshipCode": {
+            "type": "string",
+            "example": "IN",
+            "x-nullable": true
+          },
+          "recordCreatedBySystem": {
+            "type": "string",
+            "example": "C4C",
+            "x-nullable": true
+          },
+          "recordUpdatedBySystem": {
+            "type": "string",
+            "example": "MobileApp",
+            "x-nullable": true
+          }
+        }
+      },
+      "StudentAdditionalInfo": {
+        "type": "object",
+        "properties": {
+          "nonEnglishName": {
+            "type": "string",
+            "example": "安娜",
+            "x-nullable": true
+          },
+          "secondaryEmail": {
+            "type": "string",
+            "example": "serina.xxxj@gmail.com",
+            "x-nullable": true
+          },
+          "maritalStatus": {
+            "type": "string",
+            "example": "Single",
+            "enum": [
+              "Single",
+              "Married",
+              "Widowed",
+              "Divorced",
+              "Seperated",
+              "Domestic Partnership",
+              "De Facto",
+              "Engaged",
+              "Never Married"
+            ],
+            "x-nullable": true
+          },
+          "countryOfBirthCode": {
+            "type": "string",
+            "example": "IN",
+            "x-nullable": true
+          },
+          "nationalityCode": {
+            "type": "string",
+            "example": "SG",
+            "x-nullable": true
+          },
+          "primaryLanguage": {
+            "type": "string",
+            "example": "Italian",
+            "enum": [
+              "Home",
+              "Destination",
+              "Australia Simplified Chinese",
+              "Afrikaans",
+              "Akan",
+              "Amharic",
+              "Arabic",
+              "Assamese",
+              "Azeri",
+              "Balochi",
+              "Bengali",
+              "Cebuano",
+              "Mandarin",
+              "Czech",
+              "Danish",
+              "German",
+              "Greek",
+              "English",
+              "Spanish",
+              "Latin-American Spanish",
+              "Estonian",
+              "Farsi",
+              "Finnish",
+              "Filipino",
+              "Fijian",
+              "French",
+              "Gaelic(Scotland)",
+              "Gujarati",
+              "Hausa",
+              "Hakka",
+              "Hebrew",
+              "Hindi",
+              "Hongkong Traditional Chinese",
+              "Hmong",
+              "Croatian",
+              "Hungarian",
+              "Armenian",
+              "Indonesian",
+              "Igbo",
+              "Ilokano",
+              "Italian",
+              "Japanese",
+              "Javanese",
+              "Khmer",
+              "Kannada",
+              "Korean",
+              "Konkani",
+              "Kurdish",
+              "Latin",
+              "Lao",
+              "Lithuanian",
+              "Latvian",
+              "Maori(New Zealand)",
+              "Malayalam",
+              "Marathi",
+              "Malay",
+              "Maltese",
+              "Burmese",
+              "Min Nan",
+              "Nepalese",
+              "Dutch",
+              "Norwegian",
+              "Oromo",
+              "Oriya",
+              "Punjabi",
+              "Polish",
+              "Pashto",
+              "Brazilian Portuguese",
+              "Romanian",
+              "Russian",
+              "Sindhi",
+              "Sign Languages",
+              "Sinhalese",
+              "Slovak",
+              "Samoan",
+              "Shona",
+              "Somali",
+              "Albanian",
+              "Serbian",
+              "Swedish",
+              "Swahili",
+              "Tamil",
+              "Telugu",
+              "Thai",
+              "Tagalog",
+              "Tongan",
+              "Turkish",
+              "Taiwan Traditional Chinese",
+              "Asante",
+              "Ukrainian",
+              "Urdu",
+              "Uzbek",
+              "Vietnamese",
+              "Wu",
+              "Xhosa",
+              "Yiddish",
+              "Yoruba",
+              "Cantonese",
+              "Chinese",
+              "Hong Kong Simplified Chinese",
+              "Zulu"
+            ],
+            "x-nullable": false
+          },
+          "preferredLanguage": {
+            "type": "string",
+            "example": "Chinese",
+            "enum": [
+              "Home",
+              "Destination",
+              "Australia Simplified Chinese",
+              "Afrikaans",
+              "Akan",
+              "Amharic",
+              "Arabic",
+              "Assamese",
+              "Azeri",
+              "Balochi",
+              "Bengali",
+              "Cebuano",
+              "Mandarin",
+              "Czech",
+              "Danish",
+              "German",
+              "Greek",
+              "English",
+              "Spanish",
+              "Latin-American Spanish",
+              "Estonian",
+              "Farsi",
+              "Finnish",
+              "Filipino",
+              "Fijian",
+              "French",
+              "Gaelic(Scotland)",
+              "Gujarati",
+              "Hausa",
+              "Hakka",
+              "Hebrew",
+              "Hindi",
+              "Hongkong Traditional Chinese",
+              "Hmong",
+              "Croatian",
+              "Hungarian",
+              "Armenian",
+              "Indonesian",
+              "Igbo",
+              "Ilokano",
+              "Italian",
+              "Japanese",
+              "Javanese",
+              "Khmer",
+              "Kannada",
+              "Korean",
+              "Konkani",
+              "Kurdish",
+              "Latin",
+              "Lao",
+              "Lithuanian",
+              "Latvian",
+              "Maori(New Zealand)",
+              "Malayalam",
+              "Marathi",
+              "Malay",
+              "Maltese",
+              "Burmese",
+              "Min Nan",
+              "Nepalese",
+              "Dutch",
+              "Norwegian",
+              "Oromo",
+              "Oriya",
+              "Punjabi",
+              "Polish",
+              "Pashto",
+              "Brazilian Portuguese",
+              "Romanian",
+              "Russian",
+              "Sindhi",
+              "Sign Languages",
+              "Sinhalese",
+              "Slovak",
+              "Samoan",
+              "Shona",
+              "Somali",
+              "Albanian",
+              "Serbian",
+              "Swedish",
+              "Swahili",
+              "Tamil",
+              "Telugu",
+              "Thai",
+              "Tagalog",
+              "Tongan",
+              "Turkish",
+              "Taiwan Traditional Chinese",
+              "Asante",
+              "Ukrainian",
+              "Urdu",
+              "Uzbek",
+              "Vietnamese",
+              "Wu",
+              "Xhosa",
+              "Yiddish",
+              "Yoruba",
+              "Cantonese",
+              "Chinese",
+              "Hong Kong Simplified Chinese",
+              "Zulu"
+            ],
+            "x-nullable": true
+          },
+          "academicTitle": {
+            "type": "string",
+            "example": "B.A",
+            "enum": [
+              "Dr.",
+              "Prof.",
+              "Prof. Dr.",
+              "B.A.",
+              "MBA",
+              "Ph.D."
+            ],
+            "x-nullable": true
+          },
+          "highestEducation": {
+            "type": "string",
+            "example": "Bachelor's Degree",
+            "enum": [
+              "High School",
+              "Bachelor's Degree",
+              "Master's Degree",
+              "Doctorate Degree",
+              "Other"
+            ],
+            "x-nullable": true
+          },
+          "primaryFinancialSource": {
+            "type": "string",
+            "example": "Employer Scholarship",
+            "enum": [
+              "Self-Funded",
+              "Parents",
+              "Seeking Scholarship",
+              "Seeking Government Scholarship",
+              "Have Government Scholarship",
+              "Bank Loan",
+              "Other",
+              "Employer Scholarship"
+            ],
+            "x-nullable": true
+          },
+          "preferredCountryCode": {
+            "type": "string",
+            "example": "Australia",
+            "enum": [
+              "AU",
+              "CA",
+              "DE",
+              "FR",
+              "GB",
+              "IE",
+              "MY",
+              "NZ",
+              "SG",
+              "US",
+              "Z99"
+            ],
+            "x-nullable": true
+          },
+          "contactMeBy": {
+            "type": "string",
+            "example": "Email",
+            "enum": [
+              "Phone",
+              "Email"
+            ],
+            "x-nullable": true
+          },
+          "howDidYouHear": {
+            "type": "string",
+            "enum": [
+              "IDP Website",
+              "Posters/Flyers",
+              "Social Media",
+              "IELTS",
+              "Channel Partner",
+              "Friends & Family",
+              "School/College Visit",
+              "Hotcourses",
+              "Newspaper Ad",
+              "Radio Ad",
+              "IDP Event",
+              "Referral Partner",
+              "Online Advertisements",
+              "IELTS Brother (China)",
+              "Referral Partner (China)",
+              "Referral Agent (China)",
+              "Study Abroad App",
+              "Channel Partner (China)",
+              "Non IDP Website"
+            ],
+            "x-nullable": false
+          },
+          "propensityValue": {
+            "type": "number",
+            "example": 1,
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "mobileLastLoginDate": {
+            "type": "string",
+            "example": "2020-03-20T09:12:28Z"
+          },
+          "modeOfCounselling": {
+            "type": "string",
+            "example": "In-person",
+            "enum": [
+              "In-person",
+              "Virtual Counselling"
+            ]
+          },
+          "interestedIDPSerivce": {
+            "type": "string",
+            "example": "To Study Overseas"
+          },
+          "mobileAppDownloaded": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "alumni": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "englishIsFirstLanguage": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          },
+          "marriageDate": {
+            "type": "string",
+            "example": "2020-03-20T09:12:28Z"
+          },
+          "guardianDateOfBirth": {
+            "type": "string",
+            "format": "date",
+            "example": "1997-04-19"
+          },
+          "finalisedDestinationCountry": {
+            "type": "string",
+            "example": "AU"
+          },
+          "studentLifeCycle": {
+            "type": "string",
+            "example": "Engage"
+          },
+          "arriveAndThriveEligible": {
+            "type": "boolean",
+            "example": false,
+            "x-nullable": true
+          },
+          "singularStudentName": {
+            "type": "string",
+            "example": "no",
+            "x-nullable": true
+          },
+          "initialFinancialAssesment": {
+            "type": "string",
+            "example": "Average",
+            "x-nullable": true
+          },
+          "guardianTitle": {
+            "type": "string",
+            "example": "Mr",
+            "x-nullable": true
+          },
+          "guardianFirstName": {
+            "type": "string",
+            "example": "John",
+            "x-nullable": true
+          },
+          "guardianLastName": {
+            "type": "string",
+            "example": "Walker",
+            "x-nullable": true
+          },
+          "guardianEmailAddress": {
+            "type": "string",
+            "example": "serina.xxxj@gmail.com",
+            "x-nullable": true
+          },
+          "guardianCompany": {
+            "type": "string",
+            "example": "Tata Consultancy Services",
+            "x-nullable": true
+          },
+          "guardianOccupation": {
+            "type": "string",
+            "example": "Engineer",
+            "x-nullable": true
+          },
+          "guardianPhoneNumber": {
+            "type": "number",
+            "example": "9878987890",
+            "x-nullable": true
+          },
+          "guardianCountryCode": {
+            "type": "string",
+            "example": "Tata Consultancy Services",
+            "x-nullable": true
+          },
+          "guardianRelationshipType": {
+            "type": "string",
+            "example": "Mother",
+            "x-nullable": true
+          },
+          "oshcType": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "oshcScheduledByInstitution": {
+            "type": "string",
+            "x-nullable": true
+          },
+          "migratedsystemcode": {
+            "type": "number",
+            "example": "01",
+            "x-nullable": true
+          },
+          "migratedsystem": {
+            "type": "string",
+            "example": "Intake",
+            "x-nullable": true
+          },
+          "migratedsystemid": {
+            "type": "number",
+            "example": "1094366",
+            "x-nullable": true
+          },
+          "migratedsystemcreatedon": {
+            "type": "number",
+            "example": "1094366",
+            "x-nullable": true
+          }
+        }
+      },
+      "StudentRelatedIdpInfo": {
+        "type": "object",
+        "properties": {
+          "siteID": {
+            "type": "string",
+            "example": "India",
+            "enum": [
+              "uae",
+              "australia",
+              "bangladesh",
+              "bahrain",
+              "canada",
+              "china",
+              "germany",
+              "egypt",
+              "global",
+              "hongkong",
+              "indonesia",
+              "india",
+              "iran",
+              "jordan",
+              "kenya",
+              "cambodia",
+              "korea",
+              "kuwait",
+              "lebanon",
+              "srilanka",
+              "middleeast",
+              "mauritius",
+              "malayasia",
+              "newcaledoia",
+              "nepal",
+              "newzealand",
+              "oman",
+              "philippines",
+              "pakistan",
+              "saudiarabia",
+              "singapore",
+              "thailand",
+              "turkey",
+              "taiwan",
+              "vietnam",
+              "HC Abroad (Global website)",
+              "HC UAE",
+              "HC Australia",
+              "HC Bangladesh",
+              "HC Bahrain",
+              "HC Brazil",
+              "HC China",
+              "HC Egypt",
+              "HC Hong Kong",
+              "HC Indonesia",
+              "HC India",
+              "HC Iran",
+              "HC Jordan",
+              "HC Cambodia",
+              "HC South Korea",
+              "HC Kuwait",
+              "HC Latin America",
+              "HC Lebanon",
+              "HC Middle East",
+              "HC Mauritius",
+              "HC Malaysia",
+              "HC Nepal",
+              "HC New Zealand",
+              "HC Oman",
+              "HC Philippines",
+              "HC Pakistan",
+              "HC Russia",
+              "HC Saudi Arabia",
+              "HC Singapore",
+              "HC Sri Lanka",
+              "HC Thailand",
+              "HC Turkey",
+              "HC Taiwan",
+              "HC Vietnam"
+            ],
+            "x-nullable": true
+          },
+          "nearestIdpOffice": {
+            "type": "string",
+            "example": "Chennai - Nungambakkam",
+            "x-nullable": true
+          },
+          "isWalkIn": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "counsellorID": {
+            "type": "string",
+            "example": "10060",
+            "x-nullable": true
+          },
+          "consellorName": {
+            "type": "string",
+            "example": "Surti Rutu Bhagubhai",
+            "x-nullable": true
+          },
+          "isReferral": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "referredByID": {
+            "type": "string",
+            "example": "92004568",
+            "x-nullable": true
+          },
+          "referredByName": {
+            "type": "string",
+            "example": "Jack",
+            "x-nullable": true
+          },
+          "referralCounsellorID": {
+            "type": "string",
+            "example": "99889",
+            "x-nullable": true
+          },
+          "referralCounsellorName": {
+            "type": "string",
+            "example": "Henry Ho",
+            "x-nullable": true
+          },
+          "termsAndConditionsAcceptance": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "termsAndConditionVersion": {
+            "type": "string",
+            "example": "v1",
+            "x-nullable": true
+          },
+          "termsAndConditionsDate": {
+            "type": "string",
+            "format": "datetime",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9].[0-9]{3,6}[Zz]{1}",
+            "description": "T&C format: yyyy-MM-ddTHH:mm:ss.fffz",
+            "example": "2024-01-21T17:04:00.000z",
+            "x-nullable": true
+          },
+          "termsAndConditionsChannel": {
+            "type": "string",
+            "example": "Website",
+            "x-nullable": true
+          },
+          "termsAndConditionsSourceCountry": {
+            "type": "string",
+            "example": "India",
+            "x-nullable": true
+          },
+          "arriveThriveTcAcceptance": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "arriveThriveTcVersion": {
+            "type": "string",
+            "example": "v1",
+            "x-nullable": true
+          },
+          "arriveThriveChannel": {
+            "type": "string",
+            "example": "Website",
+            "x-nullable": true
+          },
+          "arriveThriveSourceCountry": {
+            "type": "string",
+            "example": "India",
+            "x-nullable": true
+          },
+          "documentTcAcceptance": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "documentTcVersion": {
+            "type": "string",
+            "example": "v1",
+            "x-nullable": true
+          },
+          "documentTcAcceptedOn": {
+            "type": "string",
+            "format": "datetime",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9].[0-9]{3,6}[Zz]{1}",
+            "description": "format: yyyy-MM-ddTHH:mm:ss.fffz",
+            "example": "2022-01-10T05:00:00.000z"
+          },
+          "deleteAccountTcAcceptance": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "deleteAccountTcVersion": {
+            "type": "string",
+            "example": "v1",
+            "x-nullable": true
+          },
+          "deleteAccountTcAcceptedOn": {
+            "type": "string",
+            "format": "datetime",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9].[0-9]{3,6}[Zz]{1}",
+            "description": "format: yyyy-MM-ddTHH:mm:ss.fffz",
+            "example": "2022-01-10T05:00:00.000z"
+          },
+          "privacyPolicyAcceptance": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "privacyPolicyVersion": {
+            "type": "string",
+            "example": "v1",
+            "x-nullable": true
+          },
+          "privacyPolicyDate": {
+            "type": "string",
+            "format": "datetime",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9].[0-9]{3,6}[Zz]{1}",
+            "description": "Privacy Policy Date format: yyyy-MM-ddTHH:mm:ss.fffz",
+            "example": "2024-01-21T17:04:00.000z"
+          },
+          "sesTermsAndConditionsAcceptance": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "sesTermsAndConditionsVersion": {
+            "type": "string",
+            "example": "v1",
+            "x-nullable": true
+          },
+          "sesTermsAndConditionsDate": {
+            "type": "string",
+            "format": "datetime",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9].[0-9]{3,6}[Zz]{1}",
+            "description": "format: yyyy-MM-ddTHH:mm:ss.fffz",
+            "example": "2023-11-20T17:04:00.000z"
+          },
+          "arriveThriveTcDate": {
+            "type": "string",
+            "format": "datetime",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9].[0-9]{3,6}[Zz]{1}",
+            "description": "format: yyyy-MM-ddTHH:mm:ss.fffz",
+            "example": "2023-12-20T17:04:00.000z"
+          },
+          "tapTcAcceptance": {
+            "type": "string",
+            "example": "yes",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "tapTcDate": {
+            "type": "string",
+            "format": "datetime",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9].[0-9]{3,6}[Zz]{1}",
+            "description": "format: yyyy-MM-ddTHH:mm:ss.fffz",
+            "example": "2023-12-21T17:04:00.000z"
+          },
+          "privacyHoldEnabled": {
+            "type": "boolean",
+            "description": "PII data for this Student record should not be anonymized if this flag is set to true",
+            "example": false,
+            "x-nullable": true
+          },
+          "sesChannel": {
+            "type": "string",
+            "example": "Website",
+            "x-nullable": true
+          },
+          "sesSourceCountry": {
+            "type": "string",
+            "example": "India",
+            "x-nullable": true
+          },
+          "picsChannel": {
+            "type": "string",
+            "example": "Website",
+            "x-nullable": true
+          },
+          "picsSourceCountry": {
+            "type": "string",
+            "example": "India",
+            "x-nullable": true
+          },
+          "picsTermsAndConditionsAcceptance": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "picsTermsAndConditionsVersion": {
+            "type": "string",
+            "example": "v1",
+            "x-nullable": true
+          },
+          "picsTermsAndConditionsDate": {
+            "type": "string",
+            "format": "datetime",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9].[0-9]{3,6}[Zz]{1}",
+            "description": "format: yyyy-MM-ddTHH:mm:ss.fffz",
+            "example": "2023-11-20T17:04:00.000z"
+          },
+          "arriveThrivePrivacyPolicyAcceptance": {
+            "type": "string",
+            "example": "no",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "arriveThrivePrivacyPolicyVersion": {
+            "type": "string",
+            "example": "v1",
+            "x-nullable": true
+          },
+          "arriveThrivePrivacyPolicyDate": {
+            "type": "string",
+            "format": "datetime",
+            "pattern": "[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])T(2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9].[0-9]{3,6}[Zz]{1}",
+            "description": "format: yyyy-MM-ddTHH:mm:ss.fffz",
+            "example": "2023-11-20T17:04:00.000z"
+          }
+        }
+      },
+      "Student": {
+        "required": [
+          "studentBaseInfo"
+        ],
+        "type": "object",
+        "properties": {
+          "studentBaseInfo": {
+            "$ref": "#/components/schemas/StudentBaseInfo"
+          },
+          "studentAdditionalInfo": {
+            "$ref": "#/components/schemas/StudentAdditionalInfo"
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Address"
+            }
+          },
+          "marketingAcceptance": {
+            "$ref": "#/components/schemas/MarketingAcceptanceFlags"
+          },
+          "educationHistory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EducationHistory"
+            }
+          },
+          "employmentHistory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmploymentHistory"
+            }
+          },
+          "studyPlanDetail": {
+            "$ref": "#/components/schemas/StudentStudyPlanDetail"
+          },
+          "englishProficiencyTestResult": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EnglishProficiencyTestResult"
+            }
+          },
+          "studyRelatedIdpInfo": {
+            "$ref": "#/components/schemas/StudentRelatedIdpInfo"
+          },
+          "studentIdentificationDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StudentIdentificationDetail"
+            }
+          },
+          "socialMediaAccountDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SocialMediaAccountDetails"
+            }
+          },
+          "visaHistory": {
+            "$ref": "#/components/schemas/VisaHistory"
+          },
+          "admissionTest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/admissionTest"
+            }
+          }
+        }
+      },
+      "StudentStudyPlanDetail": {
+        "type": "object",
+        "properties": {
+          "studyAbroadIndicator": {
+            "type": "string",
+            "example": "yes",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "bookIeltsIndicator": {
+            "type": "string",
+            "example": "yes",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "studentSupportIndicator": {
+            "type": "string",
+            "example": "yes",
+            "enum": [
+              "yes",
+              "no"
+            ],
+            "x-nullable": true
+          },
+          "studyPlanDate": {
+            "type": "string",
+            "example": "Feb-2020"
+          },
+          "preferredStudyCountrySet": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "example": "Australia, Canada",
+              "maximum": 10
+            }
+          },
+          "preferredStudyLevel": {
+            "type": "string",
+            "example": "Undergraduate"
+          }
+        }
+      },
+      "StudentIdentificationDetail": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "example": "CP-ABCDEFGHIJ"
+          },
+          "identificationDocumentsObjectID": {
+            "type": "string",
+            "example": "00163E26B79B1ED795843931B5306536"
+          },
+          "docType": {
+            "type": "string",
+            "example": "passport"
+          },
+          "docNumber": {
+            "type": "string",
+            "example": "AADDGGJJLL34"
+          },
+          "issuingCountry": {
+            "type": "string",
+            "example": "India"
+          },
+          "issueDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2019-02-01"
+          },
+          "validUntilDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2039-02-01"
+          },
+          "visanumber": {
+            "type": "string",
+            "example": "RE34323"
+          },
+          "visaAppliedCountry": {
+            "type": "string",
+            "example": "India"
+          },
+          "destinationCountryVisa": {
+            "type": "boolean",
+            "description": "Default value is false.",
+            "example": true,
+            "x-nullable": false
+          },
+          "visaRefused": {
+            "type": "boolean",
+            "description": "Indicates whether the user's visa has ever been refused or not. Default value is false.",
+            "example": true,
+            "x-nullable": false
+          },
+          "visaExpiryDate": {
+            "type": "string",
+            "format": "date",
+            "example": "2019-02-01"
+          },
+          "visaType": {
+            "type": "string",
+            "example": "Professional Development"
+          },
+          "visaRefusedCountry": {
+            "type": "string",
+            "example": "Mali"
+          }
+        }
+      },
+      "EnglishProficiencyTestResult": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "example": "CP-ABCDEFGHIJ4"
+          },
+          "englishProficiencyObjectID": {
+            "type": "string",
+            "example": "0016656576779B1ED795843931B5366766"
+          },
+          "testName": {
+            "type": "string",
+            "example": "IELTS"
+          },
+          "status": {
+            "type": "string",
+            "example": "INTENTTOTAKE"
+          },
+          "score": {
+            "type": "number",
+            "format": "float",
+            "example": 94.2
+          },
+          "detailedScore": {
+            "type": "number",
+            "format": "float",
+            "description": "Detailed score of the test. Fields will change according to the test type",
+            "example": {
+              "listeningScore": "3",
+              "readingScore": "5",
+              "writingScore": "6",
+              "speakingScore": "3",
+              "englishScore": "2"
+            }
+          },
+          "engTestTakenInTwoYears": {
+            "type": "string",
+            "example": "yes"
+          },
+          "referenceNumber": {
+            "type": "number",
+            "example": "2345673445"
+          },
+          "date": {
+            "type": "string",
+            "format": "date",
+            "example": "1997-01-26",
+            "x-nullable": true
+          },
+          "studentHowDidYouHear": {
+            "type": "string",
+            "example": "Radio Ad"
+          },
+          "studentSiteId": {
+            "type": "string",
+            "example": "india"
+          },
+          "testDescription": {
+            "type": "string",
+            "example": "IELTS Academic"
+          }
+        }
+      },
+      "SocialMediaAccountDetails": {
+        "type": "object",
+        "properties": {
+          "externalId": {
+            "type": "string",
+            "example": "CP-ABCDEFGHIJ"
+          },
+          "socialMediaAccountObjectID": {
+            "type": "string",
+            "example": "0016656576779B1ED795843931B5366766"
+          },
+          "socialMediaIdentity": {
+            "type": "string",
+            "example": "serena.john"
+          },
+          "socialMediaType": {
+            "type": "string",
+            "example": "linkedin"
+          },
+          "socialMediaUrl": {
+            "type": "string",
+            "example": "www.linkedin.com/serena.john"
+          }
+        }
+      },
+      "VisaHistory": {
+        "type": "object",
+        "properties": {
+          "protectionVisaInAnyCountry": {
+            "type": "boolean",
+            "description": "Indicates whether the user has a protection visa in any country or not. Default value is false.",
+            "example": true,
+            "x-nullable": false
+          },
+          "visaRefusedDate": {
+            "type": "string",
+            "example": "2020-03-20T09:12:28Z"
+          },
+          "visaRefusedReason": {
+            "type": "string",
+            "example": "Refusal Reason"
+          },
+          "visaCancelledCountry": {
+            "type": "string",
+            "example": "Australia"
+          },
+          "visaCancellationReason": {
+            "type": "string",
+            "example": "Cancellation Reason"
+          }
+        }
+      },
+      "admissionTest": {
+        "properties": {
+          "act": {
+            "properties": {
+              "english": {
+                "example": 1,
+                "format": "integer",
+                "type": "number"
+              },
+              "math": {
+                "example": 2,
+                "format": "integer",
+                "type": "number"
+              },
+              "reading": {
+                "example": 5,
+                "format": "integer",
+                "type": "number"
+              },
+              "science": {
+                "example": 4,
+                "format": "integer",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "externalId": {
+            "example": "CP-DSLFDYDSOI",
+            "type": "string"
+          },
+          "gmat": {
+            "properties": {
+              "analyticalWriting": {
+                "example": 1.5,
+                "format": "float",
+                "type": "number"
+              },
+              "integratingReasoning": {
+                "example": 6,
+                "format": "integer",
+                "type": "number"
+              },
+              "quantitativeReasoning": {
+                "example": 10,
+                "format": "integer",
+                "type": "number"
+              },
+              "verbalReasoning": {
+                "example": 35,
+                "format": "integer",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "gre": {
+            "properties": {
+              "analyticalWriting": {
+                "example": 3.5,
+                "format": "float",
+                "type": "number"
+              },
+              "quantitativeScore": {
+                "example": 131,
+                "format": "integer",
+                "type": "number"
+              },
+              "verbalScore": {
+                "example": 130,
+                "format": "integer",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "sat": {
+            "properties": {
+              "essay": {
+                "example": 2,
+                "format": "integer",
+                "type": "number"
+              },
+              "mathTest": {
+                "example": 201,
+                "format": "integer",
+                "type": "number"
+              },
+              "readingWritingTest": {
+                "example": 200,
+                "format": "integer",
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "status": {
+            "enum": [
+              "Taken",
+              "NotTaken",
+              "Intended"
+            ],
+            "type": "string"
+          },
+          "testName": {
+            "enum": [
+              "ACT",
+              "GMAT",
+              "GRE",
+              "SAT"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "BusinessProcessPayload": {
+        "type": "object",
+        "properties": {
+          "processId": {
+            "type": "string",
+            "example": "100"
+          },
+          "processName": {
+            "type": "string",
+            "example": "Course Enquiry"
+          },
+          "eventType": {
+            "type": "string",
+            "example": "StudentEnquired"
+          },
+          "correlationId": {
+            "type": "string",
+            "example": "CE-1234567"
+          },
+          "messageBody": {
+            "type": "object",
+            "minProperties": 1,
+            "maxProperties": 15,
+            "example": {
+              "firstName": "Serena",
+              "lastName": "John",
+              "email": "serena.john@xmail.com"
+            }
+          }
+        }
+      },
+      "StudentUuidByCrmUuid": {
+        "type": "object",
+        "properties": {
+          "studentUuid": {
+            "type": "string",
+            "format": "uuid",
+            "example": "00163e26-b78b-1ed7-8ef0-713f46aa093e",
+            "x-nullable": true
+          },
+          "crmStudentUuid": {
+            "type": "string",
+            "format": "uuid",
+            "example": "00163xf6-b7gh-1ere-8e54-71adgeda095t",
+            "x-nullable": true
+          },
+          "firstName": {
+            "type": "string",
+            "example": "Serina",
+            "x-nullable": false
+          },
+          "middleName": {
+            "type": "string",
+            "example": "John",
+            "x-nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "example": "Joseph",
+            "x-nullable": false
+          }
+        }
+      },
+      "StudentUuidByEmailId": {
+        "type": "object",
+        "properties": {
+          "studentUuid": {
+            "type": "string",
+            "format": "uuid",
+            "example": "00163e26-b78b-1ed7-8ef0-713f46aa093e",
+            "x-nullable": false
+          },
+          "crmStudentUuid": {
+            "type": "string",
+            "format": "uuid",
+            "example": "00163xf6-b7gh-1ere-8e54-71adgeda095t",
+            "x-nullable": true
+          },
+          "crmStudentID": {
+            "type": "number",
+            "example": 111111111,
+            "x-nullable": false
+          }
+        }
+      },
+      "StudentCreation": {
+        "type": "object",
+        "properties": {
+          "studentUuid": {
+            "type": "string",
+            "description": "The Student user ID.",
+            "example": "00163e26-b78b-1ed7-8ef0-713f46aa093e"
+          },
+          "message": {
+            "type": "string",
+            "example": "Student record created successfully",
+            "default": "Student record created successfully"
+          }
+        }
+      },
+      "StudentAnonymization": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Successfully masked and published the student data",
+            "default": "Successfully masked and published the student data"
+          }
+        }
+      },
+      "StudentUpdate": {
+        "type": "object",
+        "properties": {
+          "businessProcessMessage": {
+            "$ref": "#/components/schemas/BusinessProcessPayload"
+          },
+          "student": {
+            "$ref": "#/components/schemas/Student"
+          }
+        }
+      },
+      "StudentGetEmailVerify": {
+        "type": "object",
+        "description": "Get Email verification status",
+        "properties": {
+          "primaryEmailVerified": {
+            "type": "boolean",
+            "description": "Indicates whether the user has verified his primary email (or) not. Default value is false.",
+            "example": true,
+            "x-nullable": false
+          },
+          "studentUUID": {
+            "type": "string",
+            "format": "uuid",
+            "example": "00163e26-b78b-1ed7-8ef0-713f46aa093e",
+            "x-nullable": true
+          }
+        }
+      },
+      "StudentSendVerify": {
+        "type": "object",
+        "description": "Email verification status",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Successfully sent verification email.",
+            "default": "Successfully sent verification email."
+          }
+        }
+      },
+      "NoneTypeBody": {
+        "type": "object",
+        "properties": {
+
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "application": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "http://example.com/oauth/token",
+            "scopes": {
+              "write": "allows modifying resources",
+              "read": "allows reading resources"
+            }
+          }
+        }
+      }
+    }
+  }
+}

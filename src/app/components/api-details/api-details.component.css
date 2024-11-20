@@ -2,10 +2,69 @@
     margin-left: 260px; /* Space for the sidebar */
     padding: 20px;
   }
-  
+
   @media (max-width: 768px) {
     .main-content-container {
       margin-left: 0; /* On smaller screens, the sidebar will overlay */
     }
   }
-  
+  .main-content-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .custom-tab-group {
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+
+  .tab-content {
+    padding: 20px;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .tab-title {
+    color: #3f51b5;
+    margin-bottom: 10px;
+  }
+
+  .parameters-list,
+  .responses-list {
+    padding-left: 20px;
+  }
+
+  .code-block {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-family: monospace;
+  }
+
+  .parameters-list li,
+  .responses-list li {
+    margin-bottom: 5px;
+  }
+
+  mat-tab-label {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  mat-tab-label.active {
+    color: #3f51b5 !important;
+  }
+
+  mat-tab-group {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1200px;
+  }
+
+  h3,
+  p {
+    margin: 0 0 10px;
+  }

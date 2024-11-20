@@ -3,12 +3,29 @@
     <h4>Developer Resources</h4>
   </div>
   <ul class="sidebar-nav">
-    <li><a routerLink="/" routerLinkActive="active">Dashboard</a></li>
-    <li><a routerLink="/" routerLinkActive="active">API Documentation</a></li>
-    <li><a routerLink="/" routerLinkActive="active">Code Samples</a></li>
-    <li><a routerLink="/" routerLinkActive="active">FAQ</a></li>
+    <a  routerLinkActive="active" (click)="togglefn()">{{data.info.title}}</a>
+    <li *ngIf="shflag">
+      <a routerLink="/api-details" routerLinkActive="active">students</a>
+    </li>
+    <li *ngIf="shflag">
+      <a routerLink="/api-details" routerLinkActive="active">Details</a>
+    </li>
+    <li *ngIf="shflag">
+      <a routerLink="/api-details" routerLinkActive="active">Customer profile</a>
+    </li>
+  <br>
+    <a  routerLinkActive="active" (click)="togglefn2()">Progressive Profile Services</a>
+    <li *ngIf="shflag2">
+      <a routerLink="/api-details" routerLinkActive="active">students</a>
+    </li>
+    <li *ngIf="shflag2">
+      <a routerLink="/api-details" routerLinkActive="active">Details</a>
+    </li>
+    <li *ngIf="shflag2">
+      <a routerLink="/api-details" routerLinkActive="active">Customer profile</a>
+    </li>
   </ul>
   <div class="sidebar-footer">
-    <p>&copy; {{ currentYear }} Your Company</p>
+    <p>&copy; {{ currentYear }} IDP Education</p>
   </div>
 </aside>
